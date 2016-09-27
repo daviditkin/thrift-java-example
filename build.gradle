@@ -41,8 +41,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+print 'Hello World'
+
 compileThrift {
-    recurse true
+   description 'Compiles thrift IDL.'
+   recurse true
 
    generator 'html'
    generator 'java', 'private-members'
