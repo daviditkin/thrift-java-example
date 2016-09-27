@@ -21,6 +21,7 @@ buildscript {
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'org.jruyi.thrift'
+apply plugin: 'idea'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -39,9 +40,9 @@ dependencies {
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
-}
 
-print 'Hello World'
+    compile 'org.apache.thrift:libthrift:0.9.1'
+}
 
 compileThrift {
    description 'Compiles thrift IDL.'
@@ -49,5 +50,13 @@ compileThrift {
 
    generator 'html'
    generator 'java', 'private-members'
+}
+
+print "${compileThrift.outputDir}/gen-java"
+
+idea {
+	module {
+		sourceDirs += file("${compileThrift.outputDir}/gen-java");
+	}
 }
 
