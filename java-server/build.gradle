@@ -41,6 +41,11 @@ sourceSets {
     }
 }
 
+compileJava {
+    dependsOn ':thrift:compileThrift'
+}
+
+
 // In this section you declare the dependencies for your production and test code
 dependencies {
     // The production code uses the SLF4J logging API at compile time
@@ -54,7 +59,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'org.apache.thrift:libthrift:1.0.0'
-
 }
 
 mainClassName = 'tutorial.server.MultiplicationServer'
