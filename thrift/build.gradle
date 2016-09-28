@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.org.jruyi.gradle:thrift-gradle-plugin:0.3.1"
+    }
+}
+apply plugin: 'java'
+apply plugin: 'org.jruyi.thrift'
+apply plugin: 'idea'
+
+compileThrift {
+   description 'Compiles thrift IDL.'
+   recurse true
+
+   generator 'html'
+   generator 'java', 'private-members'
+	generator 'py'
+}
+
+configurations {
+	generated
+}
+
+ext {
+	thriftGenJava  = "${compileThrift.outputDir}/gen-java"
+	thriftGenPython  ="${compileThrift.outputDir}/gen-py"
+}
+
+idea {
+	module {
+		sourceDirs += file("${compileThrift.outputDir}/gen-java");
+	}
+}
+
