@@ -10,5 +10,5 @@
  */
 
 // To declare projects as part of a multi-project build use the 'include' method
-include ':thrift', ':java-server'
+include ':thrift', ':java-server', ':python-client'
 rootProject.name = 'thrift-example'
