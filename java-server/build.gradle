@@ -45,6 +45,13 @@ dependencies {
     compile 'org.apache.thrift:libthrift:1.0.0'
 }
 
+idea {
+    module {
+        generatedSourceDirs += file(project(":thrift").ext.thriftGenJava)
+        sourceDirs += file(project(":thrift").ext.thriftGenJava)
+    }
+}
+
 mainClassName = 'tutorial.server.MultiplicationServer'
 
 

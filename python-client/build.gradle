@@ -1,6 +1,8 @@
 // Need to make sure thrift project configures first so that we can configure sourceSets
 evaluationDependsOn(':thrift')
 
+apply plugin: 'idea'
+
 def libDir = file("${buildDir}/install/lib")
 def genDir = file(project(":thrift").ext.thriftGenPython)
 
@@ -8,6 +10,7 @@ println "genDir is ${genDir}"
 println "libDir is ${libDir}"
 println "the src dir is ${projectDir}/src"
 println "the install dir is ${buildDir}/install"
+
 task installDist(dependsOn: ':thrift:compileThrift')<<  {
 	mkdir("${buildDir}/install")
 	copy {
@@ -19,4 +22,12 @@ task installDist(dependsOn: ':thrift:compileThrift')<<  {
 		into "${buildDir}/install"
 	}
 }
+
+idea {
+	module {
+		generatedSourceDirs += file(project(":thrift").ext.thriftGenPython)
+		sourceDirs += file(project(":thrift").ext.thriftGenPython)
+	}
+}
+
 
